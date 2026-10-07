@@ -42,10 +42,10 @@ class Enemy:
     def update(self, walls, player, rows, cols):
         from game.maze import bfs
         self.timer += 1
+        pr, pc = player.rect.centery//CELL, player.rect.centerx//CELL
+        step = bfs(walls, (self.r, self.c), (pr, pc), rows, cols)
         if self.timer >= self.move_interval:
             self.timer = 0
-            pr, pc = player.rect.centery//CELL, player.rect.centerx//CELL
-            step = bfs(walls, (self.r, self.c), (pr, pc), rows, cols)
             if step:
                 dr, dc = step
                 self.r += dr; self.c += dc
